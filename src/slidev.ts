@@ -42,15 +42,9 @@ export function buildFromContentSchema(
   content: z.infer<typeof GenerateSlideSchema>,
 ) {
   const settings = ['mdc: true']
-  if (content.settings.background) {
-    settings.push(`background: "${content.settings.background}"`)
-  }
-  if (content.settings.cssClass && content.settings.cssClass.length > 0) {
-    settings.push(`class: ${content.settings.cssClass.join(' ')}`)
-  }
   if (content.settings.fonts) {
     settings.push(
-      `fonts:\n  sans: "${content.settings.fonts.sans}"\n  serif: "${content.settings.fonts.serif}"\n  mono: "${content.settings.fonts.mono}"`,
+      `fonts:\n  sans: ${content.settings.fonts.sans}\n  serif: ${content.settings.fonts.serif}\n  mono: ${content.settings.fonts.mono}`,
     )
   }
   if (content.settings.lineNumbers) {
@@ -65,21 +59,25 @@ export function buildFromContentSchema(
   const pages = content.pages.map((page) => {
     const settings = []
     if (page.layout) {
-      settings.push(`layout: "${page.layout}"`)
+      settings.push(`layout: ${page.layout}`)
     }
     if (page.imageUrl) {
       settings.push(`image: "${page.imageUrl}"`)
+    }
+    if (page.backgroundImageUrl) {
+      settings.push(`background: "${page.backgroundImageUrl}"`)
+    }
+    if (page.colorSchema) {
+      settings.push(`colorSchema: ${page.colorSchema}`)
     }
     if (page.cssClass && page.cssClass.length > 0) {
       settings.push(`class: ${page.cssClass.join(' ')}`)
     }
 
-    return `---\n${settings.join('\n')}\n---\n\n${page.content}\n`
+    return `${settings.join('\n')}\n---\n\n${page.content}`
   })
-  // first page should not have settings section
-  pages[0] = `---\n${content.pages[0].content}\n`
 
-  const slide = `---\n${settings.join('\n')}\n${pages.join('')}`
+  const slide = `---\n${settings.join('\n')}\n${pages.join('\n---\n')}`
 
   console.log(slide)
 
