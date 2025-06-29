@@ -3,7 +3,9 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { compress } from 'hono/compress'
-import * as slidev from './service/slidev.js'
+import * as slidev from './slidev.js'
+import { createAndWriteTempFile, deleteOldTempFiles } from './util.js'
+import crypto from 'crypto'
 
 const app = new Hono()
 
@@ -16,11 +18,31 @@ app.get('/', (c) => {
 })
 
 app.post('/api/v1/export', async (c) => {
-  const pdfFile = await slidev.build(await c.req.text())
+  const tempFile = createAndWriteTempFile(await c.req.text(), {
+    postfix: '.md',
+  })
 
-  c.header('Content-Type', 'application/pdf')
-  c.header('Content-Disposition', `attachment; filename="aaa.pdf"`)
-  return c.body(pdfFile)
+  try {
+    const pdfFile = await slidev.build(tempFile.name)
+    c.header('Content-Type', 'application/pdf')
+    c.header(
+      'Content-Disposition',
+      `attachment; filename="${crypto.randomUUID()}.pdf"`,
+    )
+    return c.body(pdfFile)
+  } catch (error) {
+    console.error('Error during Slidev export:', error)
+    return c.json(
+      {
+        error: 'Failed to export the presentation',
+        details: error instanceof Error ? error.message : String(error),
+      },
+      500,
+    )
+  } finally {
+    console.log(`Removing temporary file: ${tempFile.name}`)
+    tempFile.removeCallback()
+  }
 })
 
 const server = serve(
@@ -33,12 +55,27 @@ const server = serve(
   },
 )
 
+// Clean up old temporary files every 5 minutes
+const scheduler = setInterval(
+  () => {
+    try {
+      console.log('Cleaning up old temporary files...')
+      deleteOldTempFiles()
+    } catch (error) {
+      console.error('Error cleaning up old temporary files:', error)
+    }
+  },
+  5 * 60 * 1000,
+)
+
 process.on('SIGINT', () => {
+  clearInterval(scheduler)
   server.close()
   process.exit(0)
 })
 
 process.on('SIGTERM', () => {
+  clearInterval(scheduler)
   server.close((err) => {
     if (err) {
       console.error(err)
