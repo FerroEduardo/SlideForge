@@ -1,4 +1,4 @@
-# slidev-worker
+# Back-end
 
 [![Build](https://github.com/FerroEduardo/slidev-generator/actions/workflows/build.yml/badge.svg)](https://github.com/FerroEduardo/slidev-generator/actions/workflows/build.yml) [![Lint](https://github.com/FerroEduardo/slidev-generator/actions/workflows/lint.yml/badge.svg)](https://github.com/FerroEduardo/slidev-generator/actions/workflows/lint.yml)
 
