@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import SendIcon from "@mui/icons-material/Send";
+import ConstructionIcon from "@mui/icons-material/Construction";
 import IconButton from "@mui/material/IconButton";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
@@ -61,11 +62,15 @@ function App() {
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
         }}
       >
+        <Typography variant="h3" align="center" sx={{ mb: 4, fontWeight: 700 }}>
+          SlideForge <ConstructionIcon fontSize="large" />
+        </Typography>
         <Container>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }} onClose={() => {}}>

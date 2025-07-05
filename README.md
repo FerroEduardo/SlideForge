@@ -1,4 +1,4 @@
-# Slidev Worker
+# SlideForge
 
 [![Build](https://github.com/FerroEduardo/slidev-generator/actions/workflows/build.yml/badge.svg)](https://github.com/FerroEduardo/slidev-generator/actions/workflows/build.yml) [![Lint](https://github.com/FerroEduardo/slidev-generator/actions/workflows/lint.yml/badge.svg)](https://github.com/FerroEduardo/slidev-generator/actions/workflows/lint.yml)
 
@@ -14,6 +14,10 @@ A full-stack service for generating professional presentation slides (PDF) from 
 ---
 
 See each subproject's README for setup, usage, and implementation details.
+
+## Demo
+
+![homepage](docs/homepage.png) ![result](docs/result.png)
 
 ## License
 
