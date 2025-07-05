@@ -5,20 +5,21 @@ on:
       - main
     types: [opened, synchronize]
     paths:
-      - 'src/**'
-      - Dockerfile
-      - package.json
-      - package-lock.json
-      - tsconfig.json
+      - 'backend/src/**'
+      - backend/Dockerfile
+      - backend/package.json
+      - backend/package-lock.json
+      - backend/tsconfig.json
   push:
     branches:
       - main
     paths:
-      - 'src/**'
-      - Dockerfile
-      - package.json
-      - package-lock.json
-      - tsconfig.json
+      - 'backend/src/**'
+      - backend/Dockerfile
+      - backend/package.json
+      - backend/package-lock.json
+      - backend/tsconfig.json
+
 
 jobs:
   lint:

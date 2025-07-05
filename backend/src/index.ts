@@ -10,13 +10,14 @@ import { generateSlide } from './model.js'
 
 const app = new Hono()
 
-app.use(cors())
+app.use(
+  cors({
+    origin: '*',
+    allowMethods: ['*'],
+  }),
+)
 app.use(logger())
 app.use(compress())
-
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
 
 app.post('/api/v1/generate', async (c) => {
   const response = await generateSlide(await c.req.text())

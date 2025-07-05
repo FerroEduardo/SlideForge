@@ -8,7 +8,11 @@
     "lint": "oxlint ./src"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@hono/node-server": "^1.14.4",
+    "@mui/icons-material": "^7.2.0",
+    "@mui/material": "^7.2.0",
     "hono": "^4.8.3",
     "openai": "^5.8.2",
     "tmp": "^0.2.3",
