@@ -1,7 +1,5 @@
 # Back-end
 
-[![Build](https://github.com/FerroEduardo/slidev-generator/actions/workflows/build.yml/badge.svg)](https://github.com/FerroEduardo/slidev-generator/actions/workflows/build.yml) [![Lint](https://github.com/FerroEduardo/slidev-generator/actions/workflows/lint.yml/badge.svg)](https://github.com/FerroEduardo/slidev-generator/actions/workflows/lint.yml)
-
 A service that generates professional presentation slides (PDF) from plain text input, optionally including image URLs. It exposes an HTTP API for easy integration.
 
 ## How it works
