@@ -1,12 +1,31 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple React + Material UI web app for generating PDF files from user-provided context.
 
-Currently, two official plugins are available:
+## How it works
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Enter your context in the text field and click the send button.
+- The app sends your input to the backend at `/api/v1/generate`.
+- When the backend responds with a PDF, a button appears under "Results:" for each generated file.
+- Click a result button to open the PDF in a new tab.
+- A timer below the send button shows how long each request takes.
+- Errors are displayed using a Material UI alert.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project uses [Vite](https://vitejs.dev/) for fast development and HMR, and includes a minimal ESLint setup.
+
+## Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+3. Open your browser at the provided local address.
+
+## Notes
+- The backend must be running and accessible at `http://localhost:3000/api/v1/generate` for the app to work.
