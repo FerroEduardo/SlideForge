@@ -31,8 +31,8 @@ A service that generates professional presentation slides (PDF) from plain text 
 
 Build and run the container:
 ```sh
-docker build -t slidev-worker:latest .
-docker run --rm --env-file .env -p 3000:3000 slidev-worker:latest
+docker build -t slideforge:latest .
+docker run --rm --env-file .env -p 3000:3000 slideforge:latest
 ```
 
 ## API
