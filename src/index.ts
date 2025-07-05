@@ -55,7 +55,7 @@ app.post('/api/v1/generate', async (c) => {
     )
   } finally {
     console.log(`Removing temporary file: ${tempFile.name}`)
-    // tempFile.removeCallback()
+    tempFile.removeCallback()
   }
 })
 

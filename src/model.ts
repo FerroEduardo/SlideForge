@@ -44,12 +44,12 @@ Choose appropriate layouts based on content:
 - 'image-left/image-right': Content with supporting images
 - 'image': Image-focused slides
 - 'full': Maximum content space
-- 'end': Final slide with centered text, never use bullet points here
+- 'end': Final slide with centered text. Never use bullet points or lists here
 
 ## IMAGE HANDLING:
 - Include image URLs in imageUrl field when provided
 - Use backgroundImageUrl for cover slides when appropriate
-- Select layout based on image importance (image-left, image-right, image, cover)
+- Select layout based on image importance (image-left, image-right, image, cover) and include the imageUrl field
 
 ## ENGAGEMENT TECHNIQUES:
 - Open with attention-grabbers: questions, statistics, bold statements

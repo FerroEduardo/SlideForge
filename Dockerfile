@@ -1,5 +1,5 @@
 # docker image build -t slidev-test:latest .
-# docker run --rm --env-file .env -p 3000:3000 slidev-test:latest
+# docker run --rm --env-file .env -p 3000:3000 --name slidev-test slidev-test:latest
 FROM node:24.3 AS builder
 
 # Set the working directory
