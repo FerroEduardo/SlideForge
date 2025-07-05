@@ -1,0 +1,31 @@
+name: Lint
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize]
+    paths:
+      - 'src/**'
+      - Dockerfile
+      - package.json
+      - package-lock.json
+      - tsconfig.json
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - Dockerfile
+      - package.json
+      - package-lock.json
+      - tsconfig.json
+
+jobs:
+  lint:
+    name: Lint (Oxlint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oxc-project/oxlint-action@v2.0.1
+        with:
+          config: .oxlintrc.json
