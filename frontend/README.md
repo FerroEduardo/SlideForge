@@ -5,6 +5,7 @@ This is a React + Material UI web app for generating PDF files from user-provide
 ## How it works
 
 - Enter your context in the text field and click the send button.
+- You can also import a PDF file: the app will extract all text from the PDF and append it to the input field.
 - The app sends your input to the backend at `/api/v1/generate`.
 - When the backend responds success, a button appears under "Results:" for each generated file.
 - Click a result button to open the PDF in a new tab.

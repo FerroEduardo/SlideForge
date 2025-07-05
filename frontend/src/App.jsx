@@ -9,6 +9,8 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import IconButton from "@mui/material/IconButton";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import { extractText, getDocumentProxy } from "unpdf";
 import "./App.css";
 
 const API_HOST = import.meta.env.VITE_API_HOST || "http://localhost:3000";
@@ -20,6 +22,7 @@ function App() {
   const [files, setFiles] = useState([]);
   const [timer, setTimer] = useState(0);
   const timerRef = useRef();
+  const fileInputRef = useRef();
 
   const handleSend = async () => {
     if (!input.trim()) {
@@ -57,6 +60,25 @@ function App() {
     }
   };
 
+  const handleFileButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.type !== "application/pdf") {
+      alert("Only PDF files are accepted.");
+      return;
+    }
+    setLoading(true);
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await getDocumentProxy(arrayBuffer);
+    const { text } = await extractText(pdf, { mergePages: true });
+    setInput((prev) => prev + (prev ? "\n" : "") + text.trim());
+    setLoading(false);
+  };
+
   return (
     <>
       <div
@@ -71,6 +93,13 @@ function App() {
         <Typography variant="h3" align="center" sx={{ mb: 4, fontWeight: 700 }}>
           SlideForge <ConstructionIcon fontSize="large" />
         </Typography>
+        <input
+          type="file"
+          accept="application/pdf"
+          style={{ display: "none" }}
+          ref={fileInputRef}
+          onChange={handleFileChange}
+        />
         <Container>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }} onClose={() => {}}>
@@ -91,21 +120,36 @@ function App() {
                 <TextField
                   fullWidth
                   multiline
-                  minRows={1}
+                  minRows={2}
                   maxRows={8}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   disabled={loading}
                 />
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
                   <div
                     style={{
                       display: "flex",
                       alignItems: "center",
                       flexDirection: "column",
-                      gap: "0.5rem",
                     }}
                   >
+                    <IconButton
+                      variant="contained"
+                      color="primary"
+                      onClick={handleFileButtonClick}
+                      disabled={loading}
+                      loading={loading}
+                    >
+                      <PictureAsPdfIcon />
+                    </IconButton>
                     <IconButton
                       color="primary"
                       onClick={handleSend}
@@ -114,18 +158,17 @@ function App() {
                     >
                       <SendIcon />
                     </IconButton>
-                    {timer > 0 && (
-                      <Typography
-                        variant="caption"
-                        style={{ userSelect: "none" }}
-                      >
-                        {timer}s
-                      </Typography>
-                    )}
                   </div>
+                  {timer > 0 && (
+                    <Typography
+                      variant="caption"
+                      style={{ userSelect: "none" }}
+                    >
+                      {timer}s
+                    </Typography>
+                  )}
                 </div>
               </div>
-              {/* Downloaded files buttons */}
               {files.length > 0 && (
                 <div>
                   <div
