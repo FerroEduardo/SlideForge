@@ -1,24 +1,18 @@
+<div align="center">
+
 # SlideForge
 
 [![Build](https://github.com/FerroEduardo/slidev-generator/actions/workflows/build.yml/badge.svg)](https://github.com/FerroEduardo/slidev-generator/actions/workflows/build.yml) [![Lint](https://github.com/FerroEduardo/slidev-generator/actions/workflows/lint.yml/badge.svg)](https://github.com/FerroEduardo/slidev-generator/actions/workflows/lint.yml)
 
-A full-stack service for generating professional presentation slides (PDF) from plain text input. The project consists of a backend HTTP API and a frontend web app for easy interaction.
-
----
+A full-stack service for generating professional presentation slides (PDF) from plain text input.
+</div>
 
 ## Project Structure
 
-- [backend/](backend/README.md) — Node.js/TypeScript service that generates slides using AI and Slidev.
-- [frontend/](frontend/README.md) — React + Material UI web app for sending context and downloading generated PDFs.
-
----
-
-See each subproject's README for setup, usage, and implementation details.
+- [backend/](backend/README.md): [Hono](https://hono.dev/) + TypeScript service that generates slides using [Gemini](https://ai.google.dev/) and [Slidev](https://sli.dev/).
+- [frontend/](frontend/README.md): React + [Material UI](https://mui.com/material-ui/) web app for sending context and downloading generated PDFs.
 
 ## Demo
 
-![homepage](docs/homepage.png) ![result](docs/result.png)
-
-## License
-
-MIT
+<img src="docs/homepage.png" alt="homepage" width="400"/>
+<img src="docs/result.png" alt="result" width="400"/>
