@@ -55,6 +55,9 @@ export function buildFromContentSchema(
   if (content.settings.theme) {
     settings.push(`theme: "${content.settings.theme}"`)
   }
+  if (content.settings.colorSchema) {
+    settings.push(`colorSchema: ${content.settings.colorSchema}`)
+  }
 
   const pages = content.pages.map((page) => {
     const settings = []
@@ -66,9 +69,6 @@ export function buildFromContentSchema(
     }
     if (page.backgroundImageUrl) {
       settings.push(`background: "${page.backgroundImageUrl}"`)
-    }
-    if (page.colorSchema) {
-      settings.push(`colorSchema: ${page.colorSchema}`)
     }
     if (page.cssClass && page.cssClass.length > 0) {
       settings.push(`class: ${page.cssClass.join(' ')}`)
