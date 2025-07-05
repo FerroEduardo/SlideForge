@@ -1,9 +1,6 @@
 import OpenAI from 'openai'
-import dotenv from 'dotenv'
 import { zodResponseFormat } from 'openai/helpers/zod'
 import { z } from 'zod'
-
-dotenv.config()
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -47,7 +44,7 @@ Choose appropriate layouts based on content:
 - 'image-left/image-right': Content with supporting images
 - 'image': Image-focused slides
 - 'full': Maximum content space
-- 'end': Final slide with centered text. Avoid using bullet points here
+- 'end': Final slide with centered text, never use bullet points here
 
 ## IMAGE HANDLING:
 - Include image URLs in imageUrl field when provided

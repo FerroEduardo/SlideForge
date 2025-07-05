@@ -2,14 +2,13 @@
   "name": "my-app",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch --env-file=.env src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node --env-file=.env dist/index.js",
     "lint": "oxlint ./src"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.4",
-    "dotenv": "^17.0.0",
     "hono": "^4.8.3",
     "openai": "^5.8.2",
     "tmp": "^0.2.3",
