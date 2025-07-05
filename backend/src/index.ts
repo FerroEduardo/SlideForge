@@ -70,7 +70,7 @@ const server = serve(
   },
 )
 
-// Clean up old temporary files every 5 minutes
+// Clean up old temporary files every 5  minutes
 const scheduler = setInterval(
   () => {
     try {
