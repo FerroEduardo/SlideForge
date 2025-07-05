@@ -59,34 +59,6 @@ app.post('/api/v1/generate', async (c) => {
   }
 })
 
-app.post('/api/v1/export', async (c) => {
-  const tempFile = createAndWriteTempFile(await c.req.text(), {
-    postfix: '.md',
-  })
-
-  try {
-    const pdfFile = await slidev.build(tempFile.name)
-    c.header('Content-Type', 'application/pdf')
-    c.header(
-      'Content-Disposition',
-      `attachment; filename="${crypto.randomUUID()}.pdf"`,
-    )
-    return c.body(pdfFile)
-  } catch (error) {
-    console.error('Error during Slidev export:', error)
-    return c.json(
-      {
-        error: 'Failed to export the presentation',
-        details: error instanceof Error ? error.message : String(error),
-      },
-      500,
-    )
-  } finally {
-    console.log(`Removing temporary file: ${tempFile.name}`)
-    tempFile.removeCallback()
-  }
-})
-
 const server = serve(
   {
     fetch: app.fetch,
