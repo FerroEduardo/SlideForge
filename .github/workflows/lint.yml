@@ -28,5 +28,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oxc-project/oxlint-action@v2.0.1
+        working-directory: backend/
         with:
           config: .oxlintrc.json

@@ -30,7 +30,9 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
+        working-directory: backend/
       - run: npm run build
+        working-directory: backend/
 
   docker:
     name: Docker Build
@@ -38,3 +40,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t slidev-worker:latest .
+        working-directory: backend/
